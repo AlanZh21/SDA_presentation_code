@@ -1,6 +1,5 @@
-import player.Player;
-
-public class MafiaGame{
+import player.*;
+public class MafiaGame extends GameTimer{
     protected GameTimer gameTimer;
     protected Player[] players;
     
@@ -9,13 +8,13 @@ public class MafiaGame{
     protected int doctorIsAlive;
 
     public MafiaGame(Player[] players, int mafia, int sheriff, int doctor){
+        super(mafia,sheriff,doctor);
         this.players = players;
 
         this.mafiaIsAlive = mafia;
         this.sheriffIsAlive = sheriff;
         this.doctorIsAlive = doctor; 
         
-        this.gameTimer = new GameTimer(mafia,sheriff,doctor);
     }
 
     public void start(){

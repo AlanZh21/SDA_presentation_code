@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import player.Player;
+import player.*;
 public class Moderator {
     MafiaGame mafiaGame;
 
@@ -20,8 +20,18 @@ public class Moderator {
                     System.out.print(inputPrompts[i]);
                     int input = Integer.parseInt(scanner.nextLine());
 
-                    if(!isValidPlayerNum(input, total) || (i == 1 && input == 0)){
-                        throw new Exception("invalid number");
+                    if(!isValidPlayerNum(total,input) || (i == 0 && input < 5) || (i == 1 && (input>=(nums[0]/2) || input<1))){
+                        String prompt;
+                        if(i == 0 && input < 5){
+                            prompt = "Number of roles need to be 5 or higher.";
+                        }else if(input < 0){
+                            prompt = "Number needs to be 0 or higher";
+                        }else if(i == 1 && (input>=(nums[0]/2) || input<1)){
+                            prompt = "Invalid mafia number (has to be less than half the total or at least 1)";
+                        }else{
+                            prompt = "Number of roles selected are more than the number of players left.";
+                        }
+                        throw new Exception(prompt);
                     }
                     else{
                         if(i == 0){ //if selection is for number of players
@@ -35,7 +45,7 @@ public class Moderator {
                         break;
                     }
                 } catch(Exception e){
-                    System.out.println("INVALID INPUT: " + e);
+                    System.out.println("INVALID INPUT: " + e.getMessage());
                 }
             }
         }
@@ -61,7 +71,7 @@ public class Moderator {
             iterator++;
         }
         //doctor
-        for(int i = 0; i<roleNums[2];i++){
+        for(int i = 0; i<roleNums[3];i++){
             result[iterator] = new Doctor();
             iterator++;
         }

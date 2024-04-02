@@ -1,4 +1,3 @@
-
 public class GameTimer{
     int round;
     String timeOfDay;
@@ -7,7 +6,7 @@ public class GameTimer{
     public GameTimer(int mafia, int sheriff, int doctor){
         this.round = 0;
         this.timeOfDay = "day";
-        setActionSequence(sheriff, doctor);
+        setActionSequence(mafia, sheriff, doctor);
     }
     public void setActionSequence(int mafia, int sheriff, int doctor) {
         if(sheriff != 0 && doctor != 0){
