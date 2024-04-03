@@ -10,7 +10,7 @@ public class Player {
         this.id = "";
     }
 
-    protected void setID(String id){
+    public void setID(String id){
         this.id = id;
     }
 }

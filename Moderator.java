@@ -1,12 +1,23 @@
 import java.util.Scanner;
 import player.*;
+import java.util.Collection;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 public class Moderator {
     MafiaGame mafiaGame;
 
     public Moderator(){
+        System.out.println("Requesting player roles...");
         int[] roleNums = getPlayers();
+        System.out.println("Generating player roles...");
         Player[] players = generatePlayerRoles(roleNums);
-        this.mafiaGame = new MafiaGame(players, roleNums[1], roleNums[2], roleNums[3]); 
+        this.mafiaGame = new MafiaGame(players, roleNums[1], roleNums[2], roleNums[3]);
+        System.out.println("Requesting player names...");
+        String[] names = getNames(roleNums[0]);
+        System.out.println("Assigning player names...");
+        assignNames(names);
+        
     }
     private int[] getPlayers(){
         String[] inputPrompts = {"Enter the number of players: ","Enter the number of mafia: ",
@@ -49,6 +60,7 @@ public class Moderator {
                 }
             }
         }
+        System.out.printf("The players are: Citizen(%d), Mafia(%d), Sheriff(%d), Doctor(%d).\n", nums[0]-nums[1]-nums[2]-nums[3],nums[1],nums[2],nums[3]);
         return nums;
     }
     private Player[] generatePlayerRoles(int[] roleNums){
@@ -76,6 +88,33 @@ public class Moderator {
             iterator++;
         }
         return result;
+    }
+    private String[] getNames(int numberOfPlayers){
+        String[] result = new String[numberOfPlayers];
+        Random rand = new Random();
+        Scanner scanner = new Scanner(System.in);
+
+        for(int i = 0; i<numberOfPlayers; i++){
+            System.out.printf("Enter an identification for the player %d: ", i+1);
+            result[i] = scanner.nextLine();
+        }
+
+        for(int i = 0; i<numberOfPlayers; i++){
+            int index = rand.nextInt(i,numberOfPlayers);
+            
+            String temp = result[index];
+            result[index] = result[0];
+            result[0] = temp;
+        }
+        System.out.println("TEST, SHUFFLED NAMES: " + Arrays.toString(result));
+        scanner.close();
+        return result;
+    }
+    private void assignNames(String[] id){
+        int iterator = 0;
+        for(Player player : mafiaGame.players){
+            player.setID(id[iterator]);
+        }
     }
     boolean isValidPlayerNum(int numOfPlayersLeft, int numSelected){
         if(numSelected > numOfPlayersLeft || numSelected<0){
