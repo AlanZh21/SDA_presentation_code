@@ -1,6 +1,5 @@
 import player.*;
 public class MafiaGame extends GameTimer{
-    protected GameTimer gameTimer;
     protected Player[] players;
     
     protected int mafiaIsAlive;
@@ -14,12 +13,11 @@ public class MafiaGame extends GameTimer{
         this.mafiaIsAlive = mafia;
         this.sheriffIsAlive = sheriff;
         this.doctorIsAlive = doctor; 
-        
     }
 
     public void start(){
         System.out.println("Starting game....");
-        gameTimer.start();
+        this.startTimer();
     }
 
 }

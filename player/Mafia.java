@@ -7,7 +7,7 @@ public class Mafia extends Player{
     public Mafia(){
         super();
     }
-    eliminate(){
-        Scanner scanner = new Scanner();
-    }
+    // eliminate(){
+    //     Scanner scanner = new Scanner(System.in);
+    // }
 }

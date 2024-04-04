@@ -107,7 +107,6 @@ public class Moderator {
             result[0] = temp;
         }
         System.out.println("TEST, SHUFFLED NAMES: " + Arrays.toString(result));
-        scanner.close();
         return result;
     }
     private void assignNames(String[] id){
@@ -124,8 +123,21 @@ public class Moderator {
             return true;
         }
     }
-    public void startGame(){
+    public void start(){
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Starting as moderator....");
+        if(mafiaGame.timeOfDay == "day"){
+            
+        }else if (mafiaGame.timeOfDay == "night"){
+            for(String sequence: mafiaGame.actionSequence){
+                if(sequence == "S"){
+                    for()
+                }
+            }
+        }
+        startRound();
+    }
+    public void startRound(){
         mafiaGame.start();
     }
 }
